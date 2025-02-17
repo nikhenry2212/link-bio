@@ -49,23 +49,69 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  /* background: aqua; */
-  width: 30rem;
-  height: 10rem;
+  width: 80vw;
+  /* Usa largura relativa para adaptar à tela */
+  max-width: 30rem;
+  /* Garante que não fique grande demais */
+  height: auto;
+  /* Permite ajuste automático da altura */
+  padding: 1rem;
+  /* Espaçamento interno para evitar cortes */
   box-sizing: border-box;
-
+  flex-wrap: wrap;
+  /* Permite que os elementos se reorganizem em telas menores */
 }
 
 .bubble {
   background-color: hsla(0, 0%, 100%, 0.1);
-  border-radius: 100%;
-  /* position: absolute; */
+  border-radius: 50%;
+  /* Mantém o formato circular */
   display: flex;
   align-items: center;
-  width: 14rem;
-  height: 6rem;
   justify-content: center;
   cursor: pointer;
   animation: balance alternate 1000ms 400ms infinite;
 
+  /* Tamanho dinâmico */
+  width: 6vw;
+  /* Usa % da largura da tela */
+  height: 6vw;
+  /* Usa % da largura para manter proporção */
+  max-width: 14rem;
+  max-height: 6rem;
+}
+
+/* 🔹 Ajuste para telas menores */
+@media (max-width: 768px) {
+
+  .container-bubble {
+    width: 90vw;
+    /* Aumenta a largura em telas menores */
+    justify-content: center;
+    /* Centraliza os elementos */
+    gap: 1rem;
+    /* Adiciona espaçamento entre os elementos */
+  }
+
+  .bubble {
+    width: 20vw;
+    height: 10vw;
+  }
+}
+
+/* 🔹 Ajuste para telas muito pequenas (celulares) */
+@media (max-width: 480px) {
+  .container-bubble {
+    flex-direction: column;
+    /* Empilha os elementos verticalmente */
+    height: auto;
+    /* Permite altura dinâmica */
+    padding: 2rem 1rem;
+    /* Ajusta o padding para melhor espaçamento */
+  }
+
+  .bubble {
+    width: 50%;
+    height: 15vw;
+  }
 }

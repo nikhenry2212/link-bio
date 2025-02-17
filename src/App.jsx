@@ -39,6 +39,7 @@ return getAcesso
       <div className="container-bubble">
         <div className="bubble">
           <IconSocial
+            
             href={"https://www.instagram.com/nikolas.pguedes/"}
             src="https://img.icons8.com/?size=100&id=oUsYJj5SHs1L&format=png&color=000000"
           />
