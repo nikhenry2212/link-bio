@@ -4,25 +4,32 @@ import { IconSocial } from "./components/IconSocial";
 import { useState, useEffect } from "react";
 
 function App() {
-  function ContadorAcessos() {
-    const [acessos, setAcessos] = useState(() => {
-      // Obtém o valor do localStorage ao carregar a página
-      return parseInt(localStorage.getItem("contador_acessos")) || 0;
-    });
+  const [acessos, setAcessos] = useState(0);
+  const [getAcesso,setGetAcesso] = useState()
 
-    useEffect(() => {
-      // Incrementa o contador quando o componente monta
-      const novoValor = acessos + 1;
-      setAcessos(novoValor);
-      localStorage.setItem("contador_acessos", novoValor);
-    }, []); // Executa apenas na montagem do componente
-
-    return <p>Quantidade de acessos: {acessos}</p>;
+  const url =  "https://back-link.onrender.com"
+  function postContadorAcessos() {
+      fetch(url + "/acessos", { method: "POST" })
+        .then((res) => res.json())
+        .then((data) => setAcessos(data.totalAcessos));
+    return acessos
   }
+function getAcessos(){
+  fetch(url + "/acesso", { method: "GET" })
+  .then((res) => res.json())
+  .then((data) => setGetAcesso(data.totalAcessos));
+return getAcesso
+}
+
+
+  useEffect(()=> {
+    postContadorAcessos();
+    getAcessos()
+  },[])
 
   return (
     <>
-      {ContadorAcessos()}
+    <p>Acesso: {getAcesso} </p>
       <div>
         <a href="https://www.youtube.com/@henryDrum" target="_blank">
           <img src={logo} className="logo" alt="Vite logo" />
