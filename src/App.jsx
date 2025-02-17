@@ -1,10 +1,28 @@
 import logo from "./assets/logo.png";
 import "./App.css";
 import { IconSocial } from "./components/IconSocial";
+import { useState, useEffect } from "react";
 
 function App() {
+  function ContadorAcessos() {
+    const [acessos, setAcessos] = useState(() => {
+      // Obtém o valor do localStorage ao carregar a página
+      return parseInt(localStorage.getItem("contador_acessos")) || 0;
+    });
+
+    useEffect(() => {
+      // Incrementa o contador quando o componente monta
+      const novoValor = acessos + 1;
+      setAcessos(novoValor);
+      localStorage.setItem("contador_acessos", novoValor);
+    }, []); // Executa apenas na montagem do componente
+
+    return <p>Quantidade de acessos: {acessos}</p>;
+  }
+
   return (
     <>
+      {ContadorAcessos()}
       <div>
         <a href="https://www.youtube.com/@henryDrum" target="_blank">
           <img src={logo} className="logo" alt="Vite logo" />
@@ -47,17 +65,16 @@ function App() {
       </div>
       <h2>Assiste meu Príncipe 🥁</h2>
       <div>
-
-      <iframe
-        width="360"
-        height="215"
-        src="https://www.youtube.com/embed/3jMva_qJpBI?si=FiwA91wa4L0kdL8q"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
+        <iframe
+          width="360"
+          height="215"
+          src="https://www.youtube.com/embed/3jMva_qJpBI?si=FiwA91wa4L0kdL8q"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
       </div>
     </>
   );
